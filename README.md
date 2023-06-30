@@ -12,14 +12,11 @@ sudo a2enmod proxy_html
 
 #### Configurar diretivas no virtual host para encaminhamento das portas
 
-# Apache Conf
+### Apache Conf
 <VirtualHost *:80>
-
   ServerName fiscaut.com.br
-
 	ServerAdmin suporte@fiscaut.com.br
 	DocumentRoot /var/www/fiscaut.com.br/public
-
 	ProxyPreserveHost On
 
   ProxyPass / http://127.0.0.1:8089/
@@ -36,13 +33,12 @@ sudo a2enmod proxy_html
 	ErrorLog ${APACHE_LOG_DIR}/fiscaut.com.br.error.log
 	CustomLog ${APACHE_LOG_DIR}/fiscaut.com.br.access.log combined
 
-
 </VirtualHost>
 
 
 #### Configuração do supervisor
 
-# Supervisor Config
+### Supervisor Config
 [program:fiscaut_app]
 process_name=%(program_name)s
 command=php /var/www/fiscaut.com.br/artisan octane:start --server=swoole --max-requests=1000 --port=8089
@@ -53,7 +49,7 @@ redirect_stderr=true
 stdout_logfile=/tmp/octane_app.log
 stopwaitsecs=3600
 
-# Restart Supervisor
+### Restart Supervisor
 sudo supervisorctl reread
 
 sudo supervisorctl update
