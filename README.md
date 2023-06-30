@@ -19,7 +19,6 @@ sudo a2enmod proxy_connect
 sudo a2enmod proxy_html
 
 
-
 sudo service apache2 restart
 
 
